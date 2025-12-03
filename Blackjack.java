@@ -8,12 +8,16 @@ public class Blackjack extends JPanel{
     private int numCards = 52;
     private int playerPoints = 0;
     private int dealerPoints = 0;
+    private boolean playerStays = false;
+    private boolean dealerStays = false;
+    private boolean playerBusted = false;
+    private boolean dealerBusted = false;
     
     ArrayList<Card> cards = new ArrayList<>();
     ArrayList<Card> usedCards = new ArrayList<>();
 
     private JFrame myFrame;
-    Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
 
     
     public Blackjack(){
@@ -24,13 +28,28 @@ public class Blackjack extends JPanel{
         dealerDraws();
         playerDraws();
         dealerDraws();
-
-        while(playerPoints < 22 || dealerPoints < 22){
-            askPlayer();
+        System.out.println("Players points: " + playerPoints);
+        System.out.println("Dealers points: " + dealerPoints);
+        
+        //draws
+        while(playerPoints < 22 && !playerStays) {
+            response();
+            System.out.println("Player's points: " + playerPoints);
         }
-       
-
-
+        
+        while(dealerPoints < 16){
+            System.out.println("Dealer draws");
+            dealerDraws();
+        }
+        
+        //tally
+        System.out.println("");
+        System.out.println("Results: ");
+        System.out.println("Player has " + playerPoints+ " points");
+        System.out.println("Dealer has " + dealerPoints + " points");
+        
+        //winner: 
+        results();
     }
 
     public void initializeDeck(){
@@ -39,7 +58,6 @@ public class Blackjack extends JPanel{
             for(int i = 1; i <= 13; i++)
                 cards.add(new Card(i,Suits));
         }
-        
     }
 
    public Card drawCard() {
@@ -54,30 +72,54 @@ public class Blackjack extends JPanel{
    public void playerDraws(){
         Card players = drawCard();
         int val = players.getValue();
+        if(val > 10)
+            val = 10;
         playerPoints += val;
-        System.out.println("value: " + val);
-        System.out.println("Players points: " + playerPoints);
+        
    }
 
    public void dealerDraws(){
         Card dealers = drawCard();
         int val = dealers.getValue();
-        System.out.println("value: "+ val);
+        if(val > 10)
+            val = 10;
         dealerPoints += val;
-        System.out.println("Dealers points: " + dealerPoints);
-        
+
    }
-   public void askPlayer(){
+
+   public static String askPlayer(){
         System.out.println("Hit or Stay?");
-        String HitorStay = scanner.nextLine();
-        System.out.println("You "+ HitorStay);
+        return scanner.nextLine(); 
+   }
+
+//what the player wants to do
+   public void response(){
+    if (askPlayer().equals("Stay"))
+        playerStays = true;
+    else 
+        
+        playerDraws();
+   }
+   public void results(){
+        if (playerPoints > dealerPoints && playerPoints < 22){
+            System.out.println("You win");
+        } else if (dealerPoints > playerPoints && dealerPoints < 22){
+            System.out.println("Dealer wins");
+        } else if (dealerPoints < playerPoints && playerPoints> 21){
+            System.out.println("You busted");
+        } else if (playerPoints< dealerPoints && dealerPoints > 21){
+            System.out.println("You win");
+        } else {
+            System.out.println("You tied");
+            new Blackjack();
+        } 
    }
    public void paintComponent(Graphics g) {
       super.repaint();
+   }
+}
 
     //Array list with all cards
     //Pull a random card and remove that card from the deck
     //Calculate winner and scores
     //J-Frame
-   }
-}
