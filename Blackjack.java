@@ -15,7 +15,8 @@ public class Blackjack extends JPanel{
             for(int i = 1; i <= 13; i++)
                 cards.add(new Card(i,Suits));
         }
-        System.out.println(cards);
+        for (int i = 0; i<=cards.size();i++)
+            System.out.println(cards.get(i));
     }
 
     //Array list with all cards
