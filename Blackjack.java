@@ -3,6 +3,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.*;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.Timer;
+import javax.swing.border.Border;
+
+
 public class Blackjack extends JPanel{
 
     private int numCards = 52;
@@ -12,6 +23,9 @@ public class Blackjack extends JPanel{
     private boolean dealerStays = false;
     private boolean playerBusted = false;
     private boolean dealerBusted = false;
+    private int windowHeight = 500;
+    private int windowWidth = 500;
+    private JTextPane textArea;
     
     ArrayList<Card> cards = new ArrayList<>();
     ArrayList<Card> usedCards = new ArrayList<>();
@@ -22,7 +36,12 @@ public class Blackjack extends JPanel{
     
     public Blackjack(){
         initializeDeck();
-
+        
+        myFrame = new JFrame("Blackjack");
+        myFrame.add(this);
+        myFrame.setSize(windowWidth, windowHeight);
+        myFrame.setVisible(true);
+        
         //setup
         playerDraws();
         dealerDraws();
@@ -117,6 +136,32 @@ public class Blackjack extends JPanel{
    public void paintComponent(Graphics g) {
       super.repaint();
    }
+
+   ///////////////////////////////////////////////////
+
+   public void setMessage(String message) {
+        String current = textArea.getText();
+        textArea.setText(current + "\n" + message);
+        textArea.select(current.length(), (current.length() + message.length() + 1));
+    }
+
+     private void setBackground() {
+        Image backImage = createImage(base+"background.png", "");
+        Border bkgrnd = new CentredBackgroundBorder(backImage);
+        ((JComponent) getContentPane()).setBorder(bkgrnd);
+    }
+    
+    protected Image createImage(String path, String description) {
+           return new ImageIcon(path, description).getImage();
+    }
+
+    public void setImage(String mood) {
+        timer.stop();
+        pics.clear();
+        getImages(mood);
+        timer.start(); 
+    }
+
 }
 
     //Array list with all cards
