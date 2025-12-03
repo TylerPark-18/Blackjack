@@ -3,10 +3,9 @@ import javax.swing.*;
 
 public class Blackjack extends JPanel{
     
-    ArrayList<Card> cards;
+    ArrayList<Card> cards = new ArrayList<>();
     
     public void Blackjack(){
-        cards = new ArrayList<>();
         initializeDeck();
     }
 
