@@ -12,6 +12,11 @@ public class Card{
         this.suit = suit;
         this.value= value;
     }
-
+    public int getValue(){
+        return value;
+    }
+    public String getSuit(){
+        return suit;
+    }
     
 }
