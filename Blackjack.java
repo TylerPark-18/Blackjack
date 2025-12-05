@@ -1,17 +1,10 @@
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import javax.swing.*;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
-import javax.swing.Timer;
-import javax.swing.border.Border;
 
 
 public class Blackjack extends JPanel{
@@ -131,8 +124,8 @@ public class Blackjack extends JPanel{
         } else {
             System.out.println("You tied");
             new Blackjack();
+            // don't create a new Blackjack from inside results; let the user restart manually
         } 
-   }
    public void paintComponent(Graphics g) {
       super.repaint();
    }
@@ -161,7 +154,25 @@ public class Blackjack extends JPanel{
         getImages(mood);
         timer.start(); 
     }
-
+    public class CentredBackgroundBorder implements Border {
+        private final Image image;
+     
+        public CentredBackgroundBorder(Image image) {
+            this.image = image;
+        }
+     
+        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+            g. drawImage();
+        }
+     
+        public Insets getBorderInsets(Component c) {
+            return new Insets(0,0,0,0);
+        }
+     
+        public boolean isBorderOpaque() {
+            return true;
+        }
+    }
 }
 
     //Array list with all cards
