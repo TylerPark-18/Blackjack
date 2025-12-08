@@ -6,8 +6,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
 
-public class Blackjack extends JPanel{
 
+public class Blackjack extends JPanel{
+    Blackjack blackjack;
     private int numCards = 52;
     private int playerPoints = 0;
     private int dealerPoints = 0;
@@ -39,7 +40,7 @@ public class Blackjack extends JPanel{
         dealerDraws();
         playerDraws();
         dealerDraws();
-        System.out.println("Players points: " + playerPoints);
+        setMessage("Players points: " + playerPoints);
         System.out.println("Dealers points: " + dealerPoints);
         
         //draws
@@ -102,6 +103,11 @@ public class Blackjack extends JPanel{
         System.out.println("Hit or Stay?");
         return scanner.nextLine(); 
    }
+   public void setMessage(String message) {
+        String current = textArea.getText();
+        textArea.setText(current + "\n" + message);
+        textArea.select(current.length(), (current.length() + message.length() + 1));
+    }
 
 //what the player wants to do
    public void response(){
