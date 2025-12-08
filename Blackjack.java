@@ -1,9 +1,8 @@
-import java.awt.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
 
@@ -16,8 +15,8 @@ public class Blackjack extends JPanel{
     private boolean dealerStays = false;
     private boolean playerBusted = false;
     private boolean dealerBusted = false;
-    private int windowHeight = 500;
-    private int windowWidth = 500;
+    private int windowHeight = 400;
+    private int windowWidth = 300;
     private JTextPane textArea;
     
     ArrayList<Card> cards = new ArrayList<>();
@@ -124,56 +123,11 @@ public class Blackjack extends JPanel{
         } else {
             System.out.println("You tied");
             new Blackjack();
-            // don't create a new Blackjack from inside results; let the user restart manually
         } 
-   public void paintComponent(Graphics g) {
-      super.repaint();
    }
-
-   ///////////////////////////////////////////////////
-
-   public void setMessage(String message) {
-        String current = textArea.getText();
-        textArea.setText(current + "\n" + message);
-        textArea.select(current.length(), (current.length() + message.length() + 1));
-    }
-
-     private void setBackground() {
-        Image backImage = createImage(base+"background.png", "");
-        Border bkgrnd = new CentredBackgroundBorder(backImage);
-        ((JComponent) getContentPane()).setBorder(bkgrnd);
-    }
-    
-    protected Image createImage(String path, String description) {
-           return new ImageIcon(path, description).getImage();
-    }
-
-    public void setImage(String mood) {
-        timer.stop();
-        pics.clear();
-        getImages(mood);
-        timer.start(); 
-    }
-    public class CentredBackgroundBorder implements Border {
-        private final Image image;
-     
-        public CentredBackgroundBorder(Image image) {
-            this.image = image;
-        }
-     
-        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            g. drawImage();
-        }
-     
-        public Insets getBorderInsets(Component c) {
-            return new Insets(0,0,0,0);
-        }
-     
-        public boolean isBorderOpaque() {
-            return true;
-        }
-    }
 }
+
+
 
     //Array list with all cards
     //Pull a random card and remove that card from the deck
