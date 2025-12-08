@@ -104,12 +104,12 @@ public class Blackjack extends JPanel{
         return scanner.nextLine(); 
    }
    public void setMessage(String message) {
-        String current = textArea.getText();
-        textArea.setText(current + "\n" + message);
-        textArea.select(current.length(), (current.length() + message.length() + 1));
+        String current = blackjack.textArea.getText();
+        blackjack.textArea.setText(current + "\n" + message);
+        blackjack.textArea.select(current.length(), (current.length() + message.length() + 1));
     }
 
-//what the player wants to do
+//what the player wants to do..
    public void response(){
     if (askPlayer().equals("Stay"))
         playerStays = true;
