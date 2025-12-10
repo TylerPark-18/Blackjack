@@ -186,17 +186,38 @@ public class Blackjack1 extends JFrame implements ActionListener{
     
     
     public class ImagePanel extends JPanel {
+        private Image singleImage;
         public ImagePanel( ) {
             super();
         }
 
+        public void setSingleImage(Image img) {
+            this.singleImage = img;
+        }
+
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
+            if (singleImage != null) {
+                g.drawImage(singleImage, 0, 0, this.getWidth(), this.getHeight(), null);
+                return;
+            }
             if (pics.size() > 0) {
                 g.drawImage(pics.get(loopslot), 0, 0, this.getWidth(), this.getHeight(), null);
             }
         }
 
+    }
+
+    /**
+     * Show a single card image given a full or relative path (e.g. "card_images/1.jpg").
+     */
+    public void showCard(String imagePath) {
+        if (imagePath == null) return;
+        Image img = new ImageIcon(imagePath).getImage();
+        if (imagePanel != null) {
+            imagePanel.setSingleImage(img);
+            imagePanel.repaint();
+        }
     }
 
     public class CentredBackgroundBorder implements Border {

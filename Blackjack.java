@@ -99,6 +99,10 @@ public class Blackjack extends JPanel{
         if(val > 10)
             val = 10;
         playerPoints += val;
+        // show the player's drawn card in the GUI
+        if (blackjack != null) {
+            blackjack.showCard(players.getPath());
+        }
         
    }
 
@@ -108,6 +112,10 @@ public class Blackjack extends JPanel{
         if(val > 10)
             val = 10;
         dealerPoints += val;
+        // show the dealer's drawn card in the GUI
+        if (blackjack != null) {
+            blackjack.showCard(dealers.getPath());
+        }
 
    }
 
