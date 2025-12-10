@@ -5,21 +5,27 @@ public class Card{
     
     private int value;
     private String suit;
+    private int imgIndex;
 
     
     private String path = "card_images/";
     private String imageFile = "";
 
-    public Card(int value, String suit){
+    public Card(int value, String suit, int imgIndex){
 
         this.suit = suit;
         this.value = value;
+        this.imgIndex = imgIndex;
     }
     public int getValue(){
         return value;
     }
     public String getSuit(){
         return suit;
+    }
+
+    public int getImgIndex() {
+        return imgIndex;
     }
     public String getPath(){
         if (imageFile == null || imageFile.isEmpty())

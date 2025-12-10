@@ -1,6 +1,10 @@
 
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,11 +31,17 @@ public class Blackjack extends JPanel{
     private JFrame myFrame;
     static Scanner scanner = new Scanner(System.in);
 
+    private Blackjack1.ImagePanel myImagePanel;
+
+
+
     
     public Blackjack(){
         initializeDeck();
         this.setOpaque(false);
         blackjack = new Blackjack1();
+
+        myImagePanel = blackjack.imagePanel;
         
         //blackjack.getContentPane().add(this, 0);
         blackjack.setSize(windowWidth, windowHeight);
@@ -76,36 +86,40 @@ public class Blackjack extends JPanel{
         int imgIndex = 1;
         for(String Suits : difSuits){
             for(int i = 1; i <= 13; i++){
-                Card c = new Card(i, Suits);
-                c.setImageIndex(imgIndex);
+                Card c = new Card(i, Suits, imgIndex + 4*i);
                 imgIndex++;
                 cards.add(c);
-
             }
+            imgIndex = 1;
+            imgIndex++;
         }
     }
 
-
-   public Card drawCard() {
+    
+    public Card drawCard() {
         int r = (int)(Math.random() * numCards);
         numCards--;
         Card c = cards.get(r);
         usedCards.add(c);
         cards.remove(r);
+        try {
+            Image myImage = ImageIO.read(new File("card_" + c.getImgIndex() + ".jpg"));
+            myImagePanel.setSingleImage(myImage);
+        } catch(IOException e) {
+            System.err.println(e);
+        }
         return c; 
-   }
+    }
 
    public void playerDraws(){
-        Card players = drawCard();
-        players.setImage(players.getPath());
-        int val = players.getValue();
+        Card card = drawCard();
+        int val = card.getValue();
         if(val > 10)
             val = 10;
         playerPoints += val;
         if (blackjack != null) {
-            blackjack.showCard(players.getPath());
+            blackjack.showCard(path + "card_" + card.getImgIndex() + ".jpg");
         }
-        
    }
 
    public void dealerDraws(){
@@ -115,7 +129,7 @@ public class Blackjack extends JPanel{
             val = 10;
         dealerPoints += val;
         if (blackjack != null) {
-            blackjack.showCard(dealers.getPath());
+            blackjack.showCard(path + "card_" + dealers.getImgIndex() + ".jpg");
         }
    }
 public void playAgain(){

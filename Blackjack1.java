@@ -1,3 +1,4 @@
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Component;
@@ -31,7 +32,7 @@ public class Blackjack1 extends JFrame implements ActionListener{
     Blackjack blackjack1;
     private final int WIDTH = 400;
     private final int HEIGHT = 300;
-    private ImagePanel imagePanel;
+    public ImagePanel imagePanel;
     private JTextPane textArea;
     private int loopslot = 0;
     private String[] files;
@@ -165,7 +166,9 @@ public class Blackjack1 extends JFrame implements ActionListener{
         }
         //System.err.println(pics.size());
     }       
+    public void setImageIndex(){
         
+    }     
         
     public void getImages(final String path) {
     
@@ -212,6 +215,13 @@ public class Blackjack1 extends JFrame implements ActionListener{
      */
     public void showCard(String imagePath) {
         if (imagePath == null) return;
+        File imgFile = new File(imagePath);
+        if (!imgFile.exists()) {
+            System.err.println("Image not found: " + imagePath);
+            return;
+        } else {
+            System.out.println("Showing image: " + imagePath);
+        }
         Image img = new ImageIcon(imagePath).getImage();
         if (imagePanel != null) {
             imagePanel.setSingleImage(img);
