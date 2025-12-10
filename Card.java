@@ -7,10 +7,11 @@ public class Card{
     private String suit;
 
     
-
+    private String path= "card_images/";
     public Card(int value, String suit){
         this.suit = suit;
         this.value= value;
+        path+="1";
     }
     public int getValue(){
         return value;
