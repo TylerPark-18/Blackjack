@@ -16,8 +16,8 @@ public class Blackjack extends JPanel{
     private boolean dealerStays = false;
     private boolean playerBusted = false;
     private boolean dealerBusted = false;
-    private int windowHeight = 400;
-    private int windowWidth = 300;
+    private int windowHeight = 500;
+    private int windowWidth = 400;
     private JTextPane textArea;
     
     ArrayList<Card> cards = new ArrayList<>();
@@ -29,19 +29,23 @@ public class Blackjack extends JPanel{
     
     public Blackjack(){
         initializeDeck();
+        this.setOpaque(false);
+        blackjack = new Blackjack1();
         
-        myFrame = new JFrame("Blackjack");
-        myFrame.add(this);
-        myFrame.setSize(windowWidth, windowHeight);
-        myFrame.setVisible(true);
+        //blackjack.getContentPane().add(this, 0);
+        blackjack.setSize(windowWidth, windowHeight);
+        blackjack.setVisible(true);
+        
+        
         
         //setup
         playerDraws();
         dealerDraws();
         playerDraws();
         dealerDraws();
+        
         blackjack.setMessage("Players points: " + playerPoints);
-        System.out.println("Dealers points: " + dealerPoints);
+        blackjack.setMessage("Dealers points: " + dealerPoints);
         
         //draws
         while(playerPoints < 22 && !playerStays) {

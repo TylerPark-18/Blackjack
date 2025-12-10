@@ -32,12 +32,12 @@ public class Blackjack1 extends JFrame implements ActionListener{
     private final int HEIGHT = 300;
     private ImagePanel imagePanel;
     private JTextPane textArea;
-    private String base;
     private int loopslot = 0;
     private String[] files;
     private Image[] allPics;
     private ArrayList<Image> pics;
     private Timer timer;
+    
     
 
     private static final String imageBase = "card_images/";
@@ -59,7 +59,7 @@ public class Blackjack1 extends JFrame implements ActionListener{
         
         init();
     }
-    
+    private String base;
     public void init() {
         String curDir = System.getProperty("user.dir");
         
@@ -121,9 +121,8 @@ public class Blackjack1 extends JFrame implements ActionListener{
     }
     
     private void setBackground() {
-        Image backImage = createImage(base+"background.png", "");
-        Border bkgrnd = new CentredBackgroundBorder(backImage);
-        ((JComponent) getContentPane()).setBorder(bkgrnd);
+        Image backImage = createImage(base+"background.jpg", "");
+        ((JComponent) getContentPane()).setBorder(new CentredBackgroundBorder(backImage));
     }
     
     protected Image createImage(String path, String description) {
