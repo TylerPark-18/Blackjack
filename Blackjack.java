@@ -2,9 +2,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
-
 
 
 public class Blackjack extends JPanel{
@@ -51,22 +51,24 @@ public class Blackjack extends JPanel{
         //draws
         while(playerPoints < 22 && !playerStays) {
             response();
-            System.out.println("Player's points: " + playerPoints);
+            blackjack.setMessage("Player's points: " + playerPoints);
         }
-        
+        //blackjack.textArea.setText("");
         while(dealerPoints < 16){
-            System.out.println("Dealer draws");
+            blackjack.setMessage("Dealer draws");
+            blackjack.setMessage("Dealer's points: " + dealerPoints);
             dealerDraws();
         }
         
         //tally
-        System.out.println("");
-        System.out.println("Results: ");
-        System.out.println("Player has " + playerPoints+ " points");
-        System.out.println("Dealer has " + dealerPoints + " points");
+        blackjack.setMessage("");
+        blackjack.setMessage("Results: ");
+        blackjack.setMessage("Player has " + playerPoints+ " points");
+        blackjack.setMessage("Dealer has " + dealerPoints + " points");
         
         //winner: 
         results();
+        playAgain();
     }
 
     public void initializeDeck(){
@@ -95,11 +97,11 @@ public class Blackjack extends JPanel{
 
    public void playerDraws(){
         Card players = drawCard();
+        players.setImage(players.getPath());
         int val = players.getValue();
         if(val > 10)
             val = 10;
         playerPoints += val;
-        // show the player's drawn card in the GUI
         if (blackjack != null) {
             blackjack.showCard(players.getPath());
         }
@@ -112,37 +114,46 @@ public class Blackjack extends JPanel{
         if(val > 10)
             val = 10;
         dealerPoints += val;
-        // show the dealer's drawn card in the GUI
         if (blackjack != null) {
             blackjack.showCard(dealers.getPath());
         }
-
    }
+public void playAgain(){
+    if (askPlayer("Play Again?").equals("Yes"))
+        new Blackjack();
+}
+   public String askPlayer(String m){
 
-   public static String askPlayer(){
-        System.out.println("Hit or Stay?");
-        return scanner.nextLine(); 
+        String s = (String)JOptionPane.showInputDialog(
+            new JFrame(),
+            m,
+            "Input Dialog",
+            JOptionPane.PLAIN_MESSAGE
+        );
+        return s;
+
+    
    }
 
 //what the player wants to do..
    public void response(){
-    if (askPlayer().equals("Stay"))
+    if (askPlayer("Hit or Stay").equals("Stay"))
         playerStays = true;
     else 
-        
         playerDraws();
    }
+   
    public void results(){
         if (playerPoints > dealerPoints && playerPoints < 22){
-            System.out.println("You win");
+            blackjack.setMessage("You win");
         } else if (dealerPoints > playerPoints && dealerPoints < 22){
-            System.out.println("Dealer wins");
+            blackjack.setMessage("Dealer wins");
         } else if (dealerPoints < playerPoints && playerPoints> 21){
-            System.out.println("You busted");
+            blackjack.setMessage("You busted");
         } else if (playerPoints< dealerPoints && dealerPoints > 21){
-            System.out.println("You win");
+            blackjack.setMessage("You win");
         } else {
-            System.out.println("You tied");
+            blackjack.setMessage("You tied");
             new Blackjack();
         } 
    }
