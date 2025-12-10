@@ -167,10 +167,10 @@ public class Blackjack1 extends JFrame implements ActionListener{
     }       
         
         
-    public void getImages(final String mood) {
+    public void getImages(final String path) {
     
         for (int i = 0; i < files.length; i++) {
-            if (files[i].startsWith("card_" + mood)) {
+            if (files[i].startsWith("card_" + path)) {
                 pics.add(allPics[i]);
             }
         }

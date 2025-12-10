@@ -11,6 +11,7 @@ public class Card{
     private String imageFile = "";
 
     public Card(int value, String suit){
+
         this.suit = suit;
         this.value = value;
     }
@@ -26,11 +27,4 @@ public class Card{
         return path + imageFile;
     }
 
-    public void setImage(String imageFile){
-        this.imageFile = imageFile;
-    }
-
-    public void setImageIndex(int index) {
-        this.imageFile = index + ".jpg";
-    }
 }
