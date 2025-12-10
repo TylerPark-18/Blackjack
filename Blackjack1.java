@@ -27,7 +27,8 @@ import javax.swing.border.Border;
 
 
 public class Blackjack1 extends JFrame implements ActionListener{
-
+    Card card;
+    Blackjack blackjack1;
     private final int WIDTH = 400;
     private final int HEIGHT = 300;
     private ImagePanel imagePanel;
@@ -132,8 +133,9 @@ public class Blackjack1 extends JFrame implements ActionListener{
     public void setImage(String mood) {
         timer.stop();
         pics.clear();
-        getImages(mood);
-        timer.start(); 
+        getImages(card.getPath());
+       
+        timer.start();  System.out.println(card.getPath());
     }
 
      public void actionPerformed(ActionEvent e) {
@@ -169,7 +171,7 @@ public class Blackjack1 extends JFrame implements ActionListener{
     public void getImages(final String mood) {
     
         for (int i = 0; i < files.length; i++) {
-            if (files[i].startsWith("pet_" + mood)) {
+            if (files[i].startsWith("" + mood)) {
                 pics.add(allPics[i]);
             }
         }

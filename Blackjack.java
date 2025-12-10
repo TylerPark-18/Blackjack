@@ -19,6 +19,7 @@ public class Blackjack extends JPanel{
     private int windowHeight = 500;
     private int windowWidth = 400;
     private JTextPane textArea;
+    private String path= "card_images/";
     
     ArrayList<Card> cards = new ArrayList<>();
     ArrayList<Card> usedCards = new ArrayList<>();
@@ -72,7 +73,9 @@ public class Blackjack extends JPanel{
         String[] difSuits = {"Diamonds","Clubs","Hearts","Spades"};
         for(String Suits : difSuits){
             for(int i = 1; i <= 13; i++)
+
                 cards.add(new Card(i,Suits));
+                cards.setImage("")
         }
     }
 
