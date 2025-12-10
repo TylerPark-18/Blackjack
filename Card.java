@@ -7,11 +7,12 @@ public class Card{
     private String suit;
 
     
-    private String path= "card_images/";
+    private String path = "card_images/";
+    private String imageFile = "";
+
     public Card(int value, String suit){
         this.suit = suit;
-        this.value= value;
-        path+="1";
+        this.value = value;
     }
     public int getValue(){
         return value;
@@ -20,7 +21,16 @@ public class Card{
         return suit;
     }
     public String getPath(){
-        return path;
+        if (imageFile == null || imageFile.isEmpty())
+            return path;
+        return path + imageFile;
     }
-    
+
+    public void setImage(String imageFile){
+        this.imageFile = imageFile;
+    }
+
+    public void setImageIndex(int index) {
+        this.imageFile = index + ".jpg";
+    }
 }

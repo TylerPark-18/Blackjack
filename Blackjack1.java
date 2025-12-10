@@ -135,7 +135,7 @@ public class Blackjack1 extends JFrame implements ActionListener{
         pics.clear();
         getImages(card.getPath());
        
-        timer.start();  System.out.println(card.getPath());
+        timer.start();
     }
 
      public void actionPerformed(ActionEvent e) {

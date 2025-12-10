@@ -1,5 +1,7 @@
 public class BlackjackMain {
     public static void main(String[] args) {
-       new Blackjack();
+       Blackjack bj = new Blackjack();
+
+
     }
 }

@@ -71,13 +71,18 @@ public class Blackjack extends JPanel{
 
     public void initializeDeck(){
         String[] difSuits = {"Diamonds","Clubs","Hearts","Spades"};
+        int imgIndex = 1;
         for(String Suits : difSuits){
-            for(int i = 1; i <= 13; i++)
+            for(int i = 1; i <= 13; i++){
+                Card c = new Card(i, Suits);
+                c.setImageIndex(imgIndex);
+                imgIndex++;
+                cards.add(c);
 
-                cards.add(new Card(i,Suits));
-                cards.setImage("")
+            }
         }
     }
+
 
    public Card drawCard() {
         int r = (int)(Math.random() * numCards);
