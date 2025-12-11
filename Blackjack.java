@@ -87,7 +87,6 @@ public class Blackjack extends JPanel{
         for(int x =1;x<=4;x++){
             for(int i = 1; i <= 13; i++){
                 Card c = new Card(i, difSuits[x-1],imgIndex);
-                System.out.println("Card " + imgIndex + ": " + c.getPath());
                 imgIndex++;
                 cards.add(c);
             }
