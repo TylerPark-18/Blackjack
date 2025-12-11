@@ -16,6 +16,7 @@ public class Card{
         this.suit = suit;
         this.value = value;
         this.imgIndex = imgIndex;
+        setImageIndex(imgIndex);
     }
     public int getValue(){
         return value;
@@ -33,4 +34,7 @@ public class Card{
         return path + imageFile;
     }
 
+    public void setImageIndex(int index) {
+        this.imageFile = "card_" + index + ".jpg";
+    }
 }
