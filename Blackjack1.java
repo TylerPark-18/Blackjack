@@ -1,9 +1,9 @@
 
-import java.awt.Font;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,10 +12,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
-
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -86,7 +83,7 @@ public class Blackjack1 extends JFrame implements ActionListener{
         contentPane.setLayout(new GridBagLayout());
         contentPane.setBackground(Color.white);
        
-        
+        //Make 2 JLayeredPanes, not ImagePanel
         imagePanel = new ImagePanel();
         int width = 200;
         int height = 200;
@@ -98,7 +95,7 @@ public class Blackjack1 extends JFrame implements ActionListener{
         c.gridx = 1;
         c.gridy = 1;
         contentPane.add(imagePanel,c);
-        
+        //TextPane
         textArea = new JTextPane();
         textArea.setEditable(false);
         JScrollPane scroll = new JScrollPane(textArea);
