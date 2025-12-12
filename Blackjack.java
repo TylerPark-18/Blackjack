@@ -190,9 +190,17 @@ public void playAgain(){
         } else if (playerPoints< dealerPoints && dealerPoints > 21){
             blackjack.setMessage("You win");
         } else {
+            if (playerPoints <=21 && dealerPoints <=21)
             blackjack.setMessage("You tied");
+            this.waitABeat(2000);
             new Blackjack();
         } 
+   }
+   public void waitABeat(int ms){
+    try {
+        Thread.sleep(ms);
+    } catch (Exception e) {
+    }
    }
 }
 
