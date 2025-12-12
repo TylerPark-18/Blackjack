@@ -124,7 +124,7 @@ public class Blackjack extends JPanel{
         if(val > 10)
             val = 10;
         if (val == 1){
-            if (playerPoints <22)
+            if (playerPoints <=21)
                 playerPoints +=11;
             else {
                 playerPoints++;
@@ -144,7 +144,7 @@ public class Blackjack extends JPanel{
             val = 10;
         if(val == 1){
 
-            if(dealerPoints < 22)
+            if(dealerPoints <= 21)
                 dealerPoints += 11;
             else {
                 dealerPoints ++;
