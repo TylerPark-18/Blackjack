@@ -198,6 +198,7 @@ public class Blackjack1 extends JFrame implements ActionListener{
             this.singleImage = img;
         }
 
+        @SuppressWarnings("SizeReplaceableByIsEmpty")
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
             if (singleImage != null) {
