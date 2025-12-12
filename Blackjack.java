@@ -59,7 +59,7 @@ public class Blackjack extends JPanel{
         blackjack.setMessage("Dealers points: " + dealerPoints);
         
         //draws
-        while(playerPoints < 22 && !playerStays) {
+        while(playerPoints <=21  && !playerStays) {
             response();
             blackjack.setMessage("Player's points: " + playerPoints);
         }
@@ -101,6 +101,14 @@ public class Blackjack extends JPanel{
         Card c = cards.get(r);
         usedCards.add(c);
         cards.remove(r);
+        return c;
+    }
+    public Card drawPlayerCard(){
+                int r = (int)(Math.random() * numCards);
+        numCards--;
+        Card c = cards.get(r);
+        usedCards.add(c);
+        cards.remove(r);
         try {
             Image myImage = ImageIO.read(new File("card_" + c.getImgIndex() + ".jpg"));
             myImagePanel.setSingleImage(myImage);
@@ -109,9 +117,8 @@ public class Blackjack extends JPanel{
         }
         return c; 
     }
-
    public void playerDraws(){
-        Card card = drawCard();
+        Card card = drawPlayerCard();
         int val = card.getValue();
         if(val > 10)
             val = 10;

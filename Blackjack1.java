@@ -159,7 +159,7 @@ public class Blackjack1 extends JFrame implements ActionListener{
         for (int i = 0; i < files.length; i++) {
             //System.err.println(files[i]);
             allPics[i]=createImage(base + files[i],"");
-            System.err.println(files[i]);
+            //System.err.println(files[i]);
             
         }
         //System.err.println(pics.size());
