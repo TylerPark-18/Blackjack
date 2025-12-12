@@ -163,6 +163,7 @@ public void playAgain(){
             blackjack.setMessage("Dealer wins");
         } else if (dealerPoints < playerPoints && playerPoints> 21){
             blackjack.setMessage("You busted");
+            playerBusted = true;
         } else if (playerPoints< dealerPoints && dealerPoints > 21){
             blackjack.setMessage("You win");
         } else {
