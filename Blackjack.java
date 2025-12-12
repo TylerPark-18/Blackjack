@@ -24,6 +24,7 @@ public class Blackjack extends JPanel{
     private int windowWidth = 400;
     private JTextPane textArea;
     private String path= "card_images/";
+    private boolean aceDrawn;
     
     ArrayList<Card> cards = new ArrayList<>();
     ArrayList<Card> usedCards = new ArrayList<>();
@@ -122,6 +123,14 @@ public class Blackjack extends JPanel{
         int val = card.getValue();
         if(val > 10)
             val = 10;
+        if (val == 1){
+            if (playerPoints <22)
+                playerPoints +=11;
+            else {
+                playerPoints++;
+            }
+            val=0;
+        }
         playerPoints += val;
         if (blackjack != null) {
             blackjack.showCard(path + "card_" + card.getImgIndex() + ".jpg");
@@ -133,10 +142,17 @@ public class Blackjack extends JPanel{
         int val = dealers.getValue();
         if(val > 10)
             val = 10;
-        dealerPoints += val;
-        if (blackjack != null) {
-            blackjack.showCard(path + "card_" + dealers.getImgIndex() + ".jpg");
+        if(val == 1){
+
+            if(dealerPoints < 22)
+                dealerPoints += 11;
+            else {
+                dealerPoints ++;
+            }
+            val=0;
         }
+        dealerPoints += val;
+
    }
 public void playAgain(){
     if (askPlayer("Play Again?").equals("Yes"))
