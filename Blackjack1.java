@@ -31,7 +31,7 @@ public class Blackjack1 extends JFrame implements ActionListener{
     private final int WIDTH = 400;
     private final int HEIGHT = 300;
     public ImagePanel imagePanel;
-    private JTextPane textArea;
+    public JTextPane textArea;
     private int loopslot = 0;
     private String[] files;
     private Image[] allPics;
@@ -182,6 +182,7 @@ public class Blackjack1 extends JFrame implements ActionListener{
         String current = textArea.getText();
         textArea.setText(current + "\n" + message);
         textArea.select(current.length(), (current.length() + message.length() + 1));
+        textArea.setCaretPosition(textArea.getDocument().getLength());
     }
     
     

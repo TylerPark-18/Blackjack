@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
 
 
 public class Blackjack extends JPanel{
@@ -33,7 +34,7 @@ public class Blackjack extends JPanel{
     static Scanner scanner = new Scanner(System.in);
 
     private Blackjack1.ImagePanel myImagePanel;
-
+   
 
 
     
@@ -48,8 +49,6 @@ public class Blackjack extends JPanel{
         blackjack.setSize(windowWidth, windowHeight);
         blackjack.setVisible(true);
         
-        
-        
         //setup
         playerDraws();
         dealerDraws();
@@ -59,20 +58,26 @@ public class Blackjack extends JPanel{
         blackjack.setMessage("Players points: " + playerPoints);
         blackjack.setMessage("Dealers points: " + dealerPoints);
         
-        //draws
+        
         while(playerPoints <=21  && !playerStays) {
             response();
             blackjack.setMessage("Player's points: " + playerPoints);
         }
-        //blackjack.textArea.setText("");
+        new Thread(() -> {
         while(dealerPoints < 16){
+            SwingUtilities.invokeLater(() -> {
             blackjack.setMessage("Dealer draws");
             blackjack.setMessage("Dealer's points: " + dealerPoints);
+            });
             dealerDraws();
+            waitABeat(700);
         }
-        
-        //tally
-        blackjack.setMessage("");
+        SwingUtilities.invokeLater(this::finishGame);
+    }).start();
+
+    }
+    public void finishGame(){
+                blackjack.setMessage("");
         blackjack.setMessage("Results: ");
         blackjack.setMessage("Player has " + playerPoints+ " points");
         blackjack.setMessage("Dealer has " + dealerPoints + " points");
@@ -81,7 +86,6 @@ public class Blackjack extends JPanel{
         results();
         playAgain();
     }
-
     public void initializeDeck(){
         String[] difSuits = {"Diamonds","Clubs","Hearts","Spades"};
         int imgIndex = 1;
@@ -111,9 +115,11 @@ public class Blackjack extends JPanel{
         usedCards.add(c);
         cards.remove(r);
         try {
-            Image myImage = ImageIO.read(new File("card_" + c.getImgIndex() + ".jpg"));
+            // Use the card's stored path so ImageIO can find the file in card_images/
+            Image myImage = ImageIO.read(new File(c.getPath()));
             myImagePanel.setSingleImage(myImage);
         } catch(IOException e) {
+            System.err.println("Failed to read image: " + c.getPath());
             System.err.println(e);
         }
         return c; 
@@ -156,7 +162,7 @@ public class Blackjack extends JPanel{
    }
 public void playAgain(){
     if (askPlayer("Play Again?").equals("Yes"))
-        new Blackjack();
+        new Thread(() -> new Blackjack()).start();
 }
    public String askPlayer(String m){
 
