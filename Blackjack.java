@@ -115,7 +115,7 @@ public class Blackjack extends JPanel{
         usedCards.add(c);
         cards.remove(r);
         try {
-            // Use the card's stored path so ImageIO can find the file in card_images/
+
             Image myImage = ImageIO.read(new File(c.getPath()));
             myImagePanel.setSingleImage(myImage);
         } catch(IOException e) {
