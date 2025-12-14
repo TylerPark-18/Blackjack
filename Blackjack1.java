@@ -258,9 +258,9 @@ public class Blackjack1 extends JFrame implements ActionListener{
             int x = 10;
             int dealery = 0;
             int playery = 0;
-            int cardWidth= 70;
-            int cardHeight = 100;
-            int spacing = 70;
+            int cardWidth= 100;
+            int cardHeight = 180;
+            int spacing = 100;
             
             for (CardImage img : playerimages){
                 g.drawImage(img.image, x,playery,cardWidth, cardHeight,this);
@@ -275,8 +275,8 @@ public class Blackjack1 extends JFrame implements ActionListener{
         }
         @Override
     public Dimension getPreferredSize() {
-        int cardWidth = 60;
-        int spacing = 75;
+        int cardWidth = 100;
+        int spacing = 100;
         int height = 230;
         int maxCards = Math.max(dealerimages.size(), playerimages.size());
         int width = Math.max(1,maxCards)* spacing+20;
