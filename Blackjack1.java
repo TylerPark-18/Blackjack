@@ -22,7 +22,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.Timer;
 import javax.swing.border.Border;
-//import javax.swing.border;
+import javax.imageio.ImageIO;
+import java.io.IOException;
 
 
 public class Blackjack1 extends JFrame implements ActionListener{
@@ -84,17 +85,35 @@ public class Blackjack1 extends JFrame implements ActionListener{
         contentPane.setBackground(Color.white);
        
         //Make 2 JLayeredPanes, not ImagePanel
+        // imagePanel = new ImagePanel();
+        // int width = 200;
+        // int height = 200;
+        // imagePanel.setPreferredSize(new Dimension(width, height));
+        // imagePanel.setMinimumSize(new Dimension(width, height));
+        // imagePanel.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+        // GridBagConstraints c = new GridBagConstraints();
+        // c.fill = GridBagConstraints.HORIZONTAL;
+        // c.gridx = 1;
+        // c.gridy = 1;
+        // contentPane.add(imagePanel,c);
         imagePanel = new ImagePanel();
         int width = 200;
         int height = 200;
-        imagePanel.setPreferredSize(new Dimension(width, height));
-        imagePanel.setMinimumSize(new Dimension(width, height));
         imagePanel.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+        JScrollPane imageScroll = new JScrollPane(
+        imagePanel,
+        JScrollPane.VERTICAL_SCROLLBAR_NEVER,
+        JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
+        );
+
+        imageScroll.setPreferredSize(new Dimension(width, height));
+        imageScroll.setMinimumSize(new Dimension(width, height));
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 1;
         c.gridy = 1;
-        contentPane.add(imagePanel,c);
+
+        contentPane.add(imageScroll, c);
         //TextPane
         textArea = new JTextPane();
         textArea.setEditable(false);
@@ -188,26 +207,81 @@ public class Blackjack1 extends JFrame implements ActionListener{
     
     public class ImagePanel extends JPanel {
         private Image singleImage;
+        private Image backImage;
+
+        private static class CardImage {
+            Image image;
+            boolean hidden;
+            CardImage(Image image, boolean hidden){
+                this.image = image;
+                this.hidden = hidden;
+            }
+        
+        }
         public ImagePanel( ) {
             super();
+            try {
+                backImage = ImageIO.read(new File("card_images/card_back.jpg"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
+        ArrayList<CardImage> dealerimages = new ArrayList<>();
+        ArrayList<CardImage> playerimages = new ArrayList<>();
         public void setSingleImage(Image img) {
             this.singleImage = img;
         }
+        public void addDealerCard(Image img, boolean hidden){
+            dealerimages.add(new CardImage(img, hidden));
+            revalidate();
+            repaint();
+        }
+        public void addPlayerCard(Image img){
+            playerimages.add(new CardImage(img, false));
+            revalidate();
+            repaint();
 
+        }
+        public void revealDealerCard(){
+            for (CardImage c : dealerimages)
+                c.hidden = false;
+            repaint();
+        }
+        public void clearImages(){
+            dealerimages.clear();
+            playerimages.clear();
+            repaint();
+        }
         @SuppressWarnings("SizeReplaceableByIsEmpty")
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            if (singleImage != null) {
-                g.drawImage(singleImage, 0, 0, this.getWidth(), this.getHeight(), null);
-                return;
+            int x = 10;
+            int dealery = 0;
+            int playery = 0;
+            int cardWidth= 70;
+            int cardHeight = 100;
+            int spacing = 70;
+            
+            for (CardImage img : playerimages){
+                g.drawImage(img.image, x,playery,cardWidth, cardHeight,this);
+                x +=spacing;
             }
-            if (pics.size() > 0) {
-                g.drawImage(pics.get(loopslot), 0, 0, this.getWidth(), this.getHeight(), null);
+            x= 10;
+            for (CardImage img : dealerimages){
+                Image image = img.hidden ? backImage : img.image;
+                g.drawImage(img.image, x,playery,cardWidth, cardHeight,this);
+                x +=spacing;
             }
         }
-
+        @Override
+    public Dimension getPreferredSize() {
+        int cardWidth = 60;
+        int spacing = 75;
+        int height = 230;
+        int maxCards = Math.max(dealerimages.size(), playerimages.size());
+        int width = Math.max(1,maxCards)* spacing+20;
+        return new Dimension(width, height);
+}
     }
 
     /**

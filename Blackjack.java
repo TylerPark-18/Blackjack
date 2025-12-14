@@ -56,7 +56,7 @@ public class Blackjack extends JPanel{
         dealerDraws();
         
         blackjack.setMessage("Players points: " + playerPoints);
-        blackjack.setMessage("Dealers points: " + dealerPoints);
+        //blackjack.setMessage("Dealers points: " + dealerPoints);
         
         
         while(playerPoints <=21  && !playerStays) {
@@ -77,7 +77,7 @@ public class Blackjack extends JPanel{
 
     }
     public void finishGame(){
-                blackjack.setMessage("");
+        blackjack.setMessage("");
         blackjack.setMessage("Results: ");
         blackjack.setMessage("Player has " + playerPoints+ " points");
         blackjack.setMessage("Dealer has " + dealerPoints + " points");
@@ -117,7 +117,7 @@ public class Blackjack extends JPanel{
         try {
 
             Image myImage = ImageIO.read(new File(c.getPath()));
-            myImagePanel.setSingleImage(myImage);
+            myImagePanel.addPlayerCard(myImage);
         } catch(IOException e) {
             System.err.println("Failed to read image: " + c.getPath());
             System.err.println(e);
@@ -161,8 +161,11 @@ public class Blackjack extends JPanel{
 
    }
 public void playAgain(){
-    if (askPlayer("Play Again?").equals("Yes"))
+    if (askPlayer("Play Again?").equals("Yes")) {
         new Thread(() -> new Blackjack()).start();
+        myImagePanel.clearImages();
+    }
+
 }
    public String askPlayer(String m){
 
