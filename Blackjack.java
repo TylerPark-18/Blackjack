@@ -149,7 +149,6 @@ public class Blackjack extends JPanel{
         if(val > 10)
             val = 10;
         if(val == 1){
-
             if(dealerPoints <= 10)
                 dealerPoints += 11;
             else {
@@ -157,6 +156,7 @@ public class Blackjack extends JPanel{
             }
             val=0;
         }
+        
         dealerPoints += val;
 
    }
@@ -164,6 +164,8 @@ public void playAgain(){
     if (askPlayer("Play Again?").equals("Yes")) {
         new Thread(() -> new Blackjack()).start();
         myImagePanel.clearImages();
+    } else {
+        System.out.println("Sorry to see you leave!");
     }
 
 }
