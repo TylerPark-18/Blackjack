@@ -3,12 +3,12 @@ public class Card{
     //H, D, C, S
     //1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
     
-    private int value;
-    private String suit;
-    private int imgIndex;
+    private final int value;
+    private final String suit;
+    private final int imgIndex;
 
     
-    private String path = "card_images/";
+    private final String path = "card_images/";
     private String imageFile = "";
 
     public Card(int value, String suit, int imgIndex){

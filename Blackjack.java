@@ -18,7 +18,6 @@ public class Blackjack extends JPanel{
     private int playerPoints = 0;
     private int dealerPoints = 0;
     private boolean playerStays = false;
-    private boolean dealerStays = false;
     private boolean playerBusted = false;
     private boolean dealerBusted = false;
     private int windowHeight = 500;
