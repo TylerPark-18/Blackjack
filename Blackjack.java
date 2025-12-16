@@ -38,7 +38,7 @@ public class Blackjack extends JPanel{
 
     
     public Blackjack(){
-        initializeDeck();
+        initializeDeck(52);
         this.setOpaque(false);
         blackjack = new Blackjack1();
 
@@ -85,16 +85,26 @@ public class Blackjack extends JPanel{
         results();
         playAgain();
     }
-    public void initializeDeck(){
+    public void initializeDeck(int number){
         String[] difSuits = {"Diamonds","Clubs","Hearts","Spades"};
         int imgIndex = 1;
+        if (number == 52){
         for(int x =1;x<=4;x++){
             for(int i = 1; i <= 13; i++){
                 Card c = new Card(i, difSuits[x-1],imgIndex);
                 imgIndex++;
                 cards.add(c);
             }
-
+        }
+        } else {
+            int count = 0;
+            for (int x = 1; x<= 4&& count < number; x++){
+                for (int i = 1;i<=13 && count < number; i++){
+                    Card c = new Card(i, difSuits[x-1],imgIndex);
+                    imgIndex++;
+                    cards.add(c);
+                }
+            }
         }
     }
 
